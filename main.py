@@ -12,10 +12,18 @@ if data["result"] != "success":
     exit()
 
 rates = data["rates"]
-time = datetime.now()
 
-with open("rates.csv", "a", newline="") as file:
+
+time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+file_name = "rates.csv"
+
+
+with open(file_name, "w", newline="", encoding="utf-8") as file:
     writer = csv.writer(file)
+
+
+    writer.writerow(["timestamp", "base_currency", "currency", "rate"])
 
     for currency, rate in rates.items():
         writer.writerow([time, "PLN", currency, rate])
